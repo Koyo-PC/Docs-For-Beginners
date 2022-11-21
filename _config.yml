@@ -1,2 +1,4 @@
 markdown: CommonMarkGhPages
-safe: false
+commonmark:
+  options: ["SMART", "FOOTNOTES", "UNSAFE"]
+  extensions: ["strikethrough", "autolink", "table", "tagfilter"]
