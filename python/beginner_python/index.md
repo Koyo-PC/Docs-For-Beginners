@@ -1,0 +1,2 @@
+- [トップ](../../) > [Python](../) > beginner_python
+- 
