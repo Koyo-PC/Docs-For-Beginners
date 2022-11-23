@@ -47,5 +47,4 @@ Pythonを使う人はよくPythonistaと呼ばれます。立派なPythonistaを
 
 ## 学習の進め方
 
-基本は[ゼロからのPython入門講座](https://www.python.jp/train/index.html)を基に進めていきます。このサイトの中の「初めてのプログラミング編」「入門編」を扱います。それぞれこのドキュメント内での、beginner_programming, beginner_pythonに対応しています。「Python以外の言語勉強したことあるからプログラミングについては初心者じゃないよ」という人も、beginner_programmingで環境構築を行っているのでこの順に進めるのがいいと思います。サイトの各編の中にはさらに細かく項目が細分化されていて、この各項目についてその内容に対する捕捉や、その項目までで得た知識を用いて解く問題をここで書いていく形式になります。なので、各項目をやる時はこのドキュメントを横に添えながら進めてください。それでは[beginner_programming](../beginner_programming)でお会いしましょう。
-
+基本は[ゼロからのPython入門講座](https://www.python.jp/train/index.html)を基に進めていきます。このサイトの中の「初めてのプログラミング編」「入門編」を扱います。それぞれこのドキュメント内での、[beginner_programming](../beginner_programming), [beginner_python](../beginner_python)に対応しています。「Python以外の言語勉強したことあるからプログラミングについては初心者じゃないよ」という人も、[beginner_programming](../beginner_programmin)で環境構築を行っているのでこの順に進めるのがいいと思います。サイトの各編の中にはさらに細かく項目が細分化されていて、この各項目についてその内容に対する捕捉や、その項目までで得た知識を用いて解く問題をここで書いていく形式になります。なので、各項目をやる時はこのドキュメントを横に添えながら進めてください。それでは[beginner_programming](../beginner_programming)でお会いしましょう。
