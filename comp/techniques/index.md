@@ -136,10 +136,11 @@ vectorは「index番号(数字)」から値が得られるようになってい�
 // 今回の場合はKeyがstring、Valueがintですね
 map<string, int> scores;
 
+scores["太郎"] = 20;            // 太郎の得点を20にした
 scores["太郎"]++;               // 太郎が得点を得た
 scores["花子"] = 100;           // 花子の得点を100にした
 cout << scores["太郎"] << endl; // 太郎の得点を出力
-// -> 「1」と出力される
+// -> 「21」と出力される
 ```
 
 <h2 id="中級編">中級編</h2>
@@ -298,6 +299,8 @@ stackとは、床に積んだ本に例えられることが多いです。「上
 ```cpp
 #include <bits/stdc++.h>
 
+using namespace std;
+
 int main() {
   // graph[i] に「頂点iと直接繋がっている頂点のidのset」を入れておきます
   // グラフの形はサイト上の画像の通りですが、0始まりにするため全ての頂点から1を引いています
@@ -382,6 +385,8 @@ BFSは、DFSととても似た方法です。コードも、できることも�
 
 ```cpp
 #include <bits/stdc++.h>
+
+using namespace std;
 
 int main() {
   vector<set<int>> graph = {
