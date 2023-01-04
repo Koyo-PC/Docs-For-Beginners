@@ -6,6 +6,16 @@ HTMLというのは、Webページの本体を書くための言語です。
 
 Web制作において、ツールやテンプレートだけを使った簡易的な制作を除けば、必ず必要な技術です。頑張ってください!
 
+## このページの目標
+
+HTMLなどWebに関する技術は最近人気があり、わかりやすい解説書なども多く出版されています。それらを用いて学習しても構いません。
+
+このページでは以下のようなことを学習します。
+
+- HTMLとは何か
+- HTMLのタグ構造の理解
+- HTMLの基本的なタグ(`head`、`body`、`div`、`span`、`table`等)
+
 ## 学習の進め方
 
 まず、「Webページ」とはどういうもので、どうやって表示されるのかをさらっと解説します。
@@ -222,13 +232,13 @@ headタグの中には、「ページに表示されないもの」を書きま�
 <!-- 略 -->
 <body>
   <!-- P1の持ち駒 -->
-  <div id="p1_captured">
+  <div id="p1-captured">
   </div>
   <!-- 将棋盤 -->
   <div id="board">
   </div>
   <!-- P2の持ち駒 -->
-  <div id="p2_captured">
+  <div id="p2-captured">
   </div>
 </body>
 <!-- 略 -->
@@ -252,4 +262,157 @@ HTMLでは、2種類のリストがあります。順序付きリスト(ordered 
 </ol>
 ```
 
-これを使ってみましょう。将棋の駒の並びは重要でないのでulでいいと思いますが、先ほど作ったdivのなかにulを作っても、先ほどのdivをulに変えるのでも、どちらでも構いません。とりあえず、divのなかにulを入れる方法でやってみます。
+これを使ってみましょう。将棋の駒の並びは重要でないのでulでいいと思いますが、先ほど作ったdivのなかにulを作るのでも、先ほどのdivをulに変えるのでも、どちらでも構いません。ここでは、divのなかにulを入れる方法でやってみます。
+
+これらのulにはidに加えてclassもつけておきましょう。後ほどCSSで見た目をつけるときに、P1、P2は似たスタイルを適用することになります。classをつけておけば、それらを1つにまとめて書くことができます。
+
+```html
+<!-- 略 -->
+<!-- P1の持ち駒 -->
+<div id="p1-captured">
+  <ul id="p1-captured-list" class="captured-list">
+    <li>歩x2</li>
+  </ul>
+</div>
+<!-- 将棋盤 -->
+<div id="board">
+</div>
+<!-- P2の持ち駒 -->
+<div id="p2-captured">
+  <ul id="p1-captured-list" class="captured-list">
+    <li>歩x3</li>
+  </ul>
+</div>
+<!-- 略 -->
+```
+
+ここまでで、持ち駒欄に対してHTMLだけでできることはほとんど終わってしまいました。中央の盤面に移りましょう。
+
+中央の盤面はExcelのようなマス目状になっています。この場合、`table`タグを用いて、表として作ってしまうのが手っ取り早いでしょう。
+
+tableタグは以下のように使うことができます。
+
+```html
+<table>
+  <tr>
+    <th>名前</th>
+    <th>得点</th>
+  </tr>
+  <tr>
+    <td>一郎</td>
+    <td>100</td>
+  </tr>
+  <tr>
+    <td>二郎</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>三郎</td>
+    <td>70</td>
+  </tr>
+</table>
+```
+
+一列ずつ横に並べている感じですね。この場合、横2、縦3のサイズの表ができます。
+
+色々タグが出てきましたが、trはTable Row(テーブルの「行」)、thはTable Header、tdはTable Dataの略です。
+
+> tableのなかにtheadとtbodyをおく書き方をありますが、ここでは割愛します。
+
+これを使って、board部分は以下のように書くことができます。
+
+```html
+<!-- 略 -->
+<!-- 将棋盤 -->
+<div id="board">
+  <table id="board-table">
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+  </table>
+</div>
+<!-- 略 -->
+```
+
+あまり綺麗なコードではありませんが...
+
+ここまでで、HTMLにできることはほとんど終わってしまいました。現時点でHTMLを開いても、よくわからない表示になるだけです。[CSS](../css/)で見た目を完成させ、[JavaScript](../js/)で実際に動作するようにします。
+
+ここまでのコードは以下の通りです。
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>将棋盤</title>
+  </head>
+  <body>
+    <!-- P1の持ち駒 -->
+    <div id="p1-captured">
+      <ul id="p1-captured-list" class="captured-list">
+        <li>歩x2</li>
+      </ul>
+    </div>
+    <!-- 将棋盤 -->
+    <div id="board">
+      <table id="board-table">
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+      </table>
+    </div>
+    <!-- P2の持ち駒 -->
+    <div id="p2-captured">
+      <ul id="p1-captured-list" class="captured-list">
+        <li>歩x3</li>
+      </ul>
+    </div>
+  </body>
+</html>
+```
+
+> ちなみに、実際の開発でここまで「HTMLだけ」を書くことはほぼありません。CSSやJSなどの作業と並行して行われます。
+
