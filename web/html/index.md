@@ -95,9 +95,9 @@ headタグの中には、「ページに表示されないもの」を書きま�
 これはmetaタグですが、その名の通り「メタデータ」を設定します。メタデータとは、ページの設定くらいに思っておけば大丈夫です。つまりmetaタグは、ページの設定を変えるものなのです。どの設定をどう変えるのか?というのは、属性で指定します。この場合、`charset`設定を`utf-8`に変えています。これによって、日本語を使った時の文字化けを防ぐことができます。
 
 > 実は、この世界には「文字コード」というものがあります。パソコンの中では、すべてのデータは2進数で保存しています。例えばa=1、b=2、...というように、文字と数字の関係を決めておかなければいけません。「あ」や「汉」、「𓄿」といった文字までも数字を割り振らなければなりません。困ったことに、世界中の人々がこのような対応表を作ってしまい、間違った表で解読してしまうといわゆる「文字化け」が起こってしまうのです。
->
+> 
 > 例えば、「あいうえお」をUTF-8という規格で数字化し、Shift-JISという規格で読んでしまうと、「縺ゅ＞縺?∴縺」となってしまいます。よく見るやつですね。これでは読めません。
->
+> 
 > これを防ぐために、「このファイルはUTF-8で書いています!」と設定しているわけです。
 
 また、metaタグには閉じタグがありません。このように、たまに「閉じタグがないタグ」も存在します。検索すればわかりますし、エディタも教えてくれるので、頑張って覚える必要はないでしょう。
@@ -131,7 +131,7 @@ headタグの中には、「ページに表示されないもの」を書きま�
 これ以外は、必要な時に調べる感じでいいです。ここに書いてあるものも、検索ですぐに思い出せるのならば、完璧には覚えていなくてもいいはずです。まあすぐ覚えるでしょう。
 
 > 見出しや画像、段落などといったタグを見て、まるでWordだなと思った方もいると思います。実際その通りなのです。HTMLとはHyperText Markup Languageの略で、マークアップ言語、つまり文書の構造を記述するための言語なのです。
->
+> 
 > こういった意識を持っておくと、タグをどう配置すればいいか考えやすくなると思います。
 
 ## HTMLを書いてみる
@@ -175,9 +175,9 @@ headタグの中には、「ページに表示されないもの」を書きま�
 左側の一番上、ファイルアイコンのタブを開き、ファイルを作成します。`index.html`というファイル名にしておいてください。
 
 > どうして`index.html`なのでしょう? 例えば、ブラウザに`https://google.com/`と打ち込んだことを想像してみてください。これは、`/`で終わっていることからもわかるように、フォルダを表しています。HTMLファイルではありません。この場合、ブラウザはどうするのでしょうか。
->
+> 
 > 実は、フォルダを開いた場合、その中に`index.html`というファイルがあれば、勝手にそれを開いてくれます。つまり、`https://google.com/`を開くことと、`https://google.com/index.html`を開くことは同じです。
->
+> 
 > このことから、`/`で終わった時勝手に開いて欲しいページ、例えばトップページなどは`index.html`という名前で作成すると良いです。
 
 さて、index.htmlのなかに、先ほど作ったデザインを作らなければいけません。ただし、まだHTMLだけなので、構造を指定する以上のことはできませんが...
@@ -189,7 +189,7 @@ headタグの中には、「ページに表示されないもの」を書きま�
 <html>
   <head>
     <meta charset="utf-8">
-    <title>ABC Coffee</title>
+    <title>ABC Coffee | TOP</title>
   </head>
   <body>
     <!-- 今から書く -->
@@ -198,7 +198,7 @@ headタグの中には、「ページに表示されないもの」を書きま�
 ```
 
 > コード中に`<!-- -- >`となっている部分がありますが、これはコメントといいます。
->
+> 
 > この中であれば、なにを書いてもエラーにならず無視されます。日本語も書けます。ちょっとしたメモを書いておくとあとでコードを読みやすいです。
 
 さて、先ほどのレイアウトですが、HTMLでは基本的に上から詰めて配置されます(普通の文章と同じですね!)。なので、一番上に並んだリンク集のようなところを作っていきましょう。このような場所をヘッダーといいます。HTMLには`<header>`というタグがあるので、これを使ってみましょう。(使わなくても問題ありませんが、使ったほうがわかりやすくなります)
@@ -258,207 +258,249 @@ headタグの中には、「ページに表示されないもの」を書きま�
   </header>
   <footer>
     <img src="(後で)">
-    <span>&copy; 2023 ABC Coffee</span>
+    <span>© 2023 ABC Coffee</span>
   </footer>
 </body>
 <!-- 略 -->
 ```
 
-----------ここまで-----------
+次に、ヘッダーとフッターの間に位置するメインコンテンツを作ります。通常`div`タグを使います。
 
+ここで作りたいのは、
 
-これだけでは分かりにくいので、このタグに名前をつけます。名前は`class`と`id`の2種類のつけ方があります。2つ以上存在するものにはclass、一つだけしか存在しないものにはidをつけましょう。
+- 画像の部分(上)
+  
+  - 背景画像(奥)
+  
+  - 文字(手前)
 
-> 1つのタグには、0~1個のidと、0~∞個のclassをつけることができます。classもidもつけることも可能です。classを複数つけたい場合、スペース区切りで書いてください。
->
-> 一つのHTML内に、同じidが2つ以上存在してはいけません。なので、例えば将棋の駒など複数存在し得るものには`class="piece"`、盤など複数存在することが絶対にないものには`id="board"`などとつけると良いです。
+- 文章の部分(下)
+  
+  - タイトル(上)
+  
+  - 文章(下)
+
+という構造です。基本的に、HTMLでは右から左、上から下、奥から手前の順で配置しておくと良いです。
+
+こんな感じになります。
 
 ```html
 <!-- 略 -->
-<body>
-  <!-- P1の持ち駒 -->
-  <div id="p1-captured">
+  </header>
+  <div>      <!-- メインコンテンツ -->
+    <div>    <!-- 画像部分 -->
+      <img src="(後で書く)">
+      <h1>ABC Coffee</h1>
+    </div>
+    <div>    <!-- 文章部分 -->
+      <h2>なんかいい感じの文章</h2>
+      <p>ああああああああああ</p>
+    </div>        
   </div>
-  <!-- 将棋盤 -->
-  <div id="board">
-  </div>
-  <!-- P2の持ち駒 -->
-  <div id="p2-captured">
-  </div>
-</body>
+  <footer>
 <!-- 略 -->
 ```
 
-いい感じですね!
+実は、HTMLだけで書けるところはこれでほとんど終わってしまいました。
 
-これらの中身を作っていきましょう。
+あとは、画像などを準備する必要があります。
 
-まず、持ち駒覧です。ここには、取った駒が表示されるはずですが、これはリストとみることができないでしょうか? このように、中に入っているものの構造を考え、それにあったタグ選びをすることが大切です。
+好きな画像を準備し、下記の場所に配置・名前の変更をしておいてください。
 
-HTMLでは、2種類のリストがあります。順序付きリスト(ordered list)`ol`、順序なしリスト(unordered list)`ul`です。
+(このサンプルの画像は[GitHub](https://github.com/Koyo-PC/Docs-For-Beginners/tree/main/web/html/project/assets)に公開しています。自由に使ってください。)
 
-このように使います。olも同様です。
-
-```html
-<ol>
-  <li>アイテム1</li>
-  <li>アイテム2</li>
-  <li>アイテム3</li>
-</ol>
+```
+(どこかのフォルダ)/
+    index.html
+    assets/
+        images/
+            logo.png
+            top_background.png
 ```
 
-これを使ってみましょう。将棋の駒の並びは重要でないのでulでいいと思いますが、先ほど作ったdivのなかにulを作るのでも、先ほどのdivをulに変えるのでも、どちらでも構いません。ここでは、divのなかにulを入れる方法でやってみます。
+> ここでは、すべての画像ファイルを`/assets/images/`内に配置していますが、これは個人の癖です。assetsをassetにしたり、assetsを作らずに直接imagesを作ったり、そもそもフォルダを作らないこともあります。
+> 
+> ただ、この規模のプロジェクトなら問題ありませんが、大きなプロジェクトになればなるほどフォルダは分けるべきだと思います。
+> 
+> 1フォルダに20個もファイルがあるような状態では管理しきれなくなってしまいます。
+> 
+> この記事では上記のフォルダ構成にしたものとして進めていきますが、変更した場合、HTML側のパスを適切に書き換えておいてください。
 
-これらのulにはidに加えてclassもつけておきましょう。後ほどCSSで見た目をつけるときに、P1、P2は似たスタイルを適用することになります。classをつけておけば、それらを1つにまとめて書くことができます。
-
-```html
-<!-- 略 -->
-<!-- P1の持ち駒 -->
-<div id="p1-captured">
-  <ul id="p1-captured-list" class="captured-list">
-    <li>歩x2</li>
-  </ul>
-</div>
-<!-- 将棋盤 -->
-<div id="board">
-</div>
-<!-- P2の持ち駒 -->
-<div id="p2-captured">
-  <ul id="p1-captured-list" class="captured-list">
-    <li>歩x3</li>
-  </ul>
-</div>
-<!-- 略 -->
-```
-
-ここまでで、持ち駒欄に対してHTMLだけでできることはほとんど終わってしまいました。中央の盤面に移りましょう。
-
-中央の盤面はExcelのようなマス目状になっています。この場合、`table`タグを用いて、表として作ってしまうのが手っ取り早いでしょう。
-
-tableタグは以下のように使うことができます。
-
-```html
-<table>
-  <tr>
-    <th>名前</th>
-    <th>得点</th>
-  </tr>
-  <tr>
-    <td>一郎</td>
-    <td>100</td>
-  </tr>
-  <tr>
-    <td>二郎</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>三郎</td>
-    <td>70</td>
-  </tr>
-</table>
-```
-
-一列ずつ横に並べている感じですね。この場合、横2、縦3のサイズの表ができます。
-
-色々タグが出てきましたが、trはTable Row(テーブルの「行」)、thはTable Header、tdはTable Dataの略です。
-
-> tableのなかにtheadとtbodyをおく書き方をありますが、ここでは割愛します。
-
-これを使って、board部分は以下のように書くことができます。
-
-```html
-<!-- 略 -->
-<!-- 将棋盤 -->
-<div id="board">
-  <table id="board-table">
-    <tr>
-      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-      <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-  </table>
-</div>
-<!-- 略 -->
-```
-
-あまり綺麗なコードではありませんが...
-
-ここまでで、HTMLにできることはほとんど終わってしまいました。現時点でHTMLを開いても、よくわからない表示になるだけです。[CSS](../css/)で見た目を完成させ、[JavaScript](../js/)で実際に動作するようにします。
-
-ここまでのコードは以下の通りです。
+その後、ファイルへのリンクなどを指定すると、以下のようなコードになります。
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>将棋盤</title>
+    <title>ABC Coffee | TOP</title>
   </head>
   <body>
-    <!-- P1の持ち駒 -->
-    <div id="p1-captured">
-      <ul id="p1-captured-list" class="captured-list">
-        <li>歩x2</li>
-      </ul>
+    <header>
+      <img src="./assets/images/logo.png">
+      <a href="./">TOP</a>
+      <a href="./menu.html">MENU</a>
+      <a href="./access.html">ACCESS</a>
+    </header>
+    <div>      <!-- メインコンテンツ -->
+      <div>    <!-- 画像部分 -->
+        <img src="./assets/images/top_background.png">
+        <h1>ABC Coffee</h1>
+      </div>
+      <div>    <!-- 文章部分 -->
+        <h2>なんかいい感じの文章</h2>
+        <p>ああああああああああ</p>
+      </div>
     </div>
-    <!-- 将棋盤 -->
-    <div id="board">
-      <table id="board-table">
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-          <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-        </tr>
-      </table>
-    </div>
-    <!-- P2の持ち駒 -->
-    <div id="p2-captured">
-      <ul id="p1-captured-list" class="captured-list">
-        <li>歩x3</li>
-      </ul>
-    </div>
+    <footer>
+      <img src="./assets/images/logo.png">
+      <span>© 2023 ABC Coffee</span>
+    </footer>
   </body>
 </html>
 ```
 
-> ちなみに、実際の開発でここまで「HTMLだけ」を書くことはほぼありません。CSSやJSなどの作業と並行して行われます。
+> ここではパスを`./`から始めていますが、それを消して`assets/images/logo.png`と書いても問題ありません。
+> 
+> これは僕のクセなだけなので、どちらでもOKです。
 
--->
+さて、これを実際に表示してみましょう。
+
+といっても、まだデザインを担当している「CSS」の作業を行っていないので、まるでバグってしまったかのような悲惨なレイアウトになっています。
+
+
+
+[[TODO 画像はる]]
+
+
+
+CSSに進む前に、MENUページ、ACCESSページを作ってみましょう。
+
+使う知識にあまり変化はないので、完成品と多少の解説だけ載せます。
+
+ファイル構成は以下のようにしました。
+
+```
+(どこかのフォルダ)/
+    index.html
+    menu.html
+    access.html
+    assets/
+        images/
+            logo.png
+            top_background.png
+            item_01.png
+            item_02.png
+            item_03.png
+            item_04.png
+```
+
+- MENUページ
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ABC Coffee | MENU</title>
+  </head>
+  <body>
+    <header>
+      <img src="./assets/images/logo.png">
+      <a href="./">TOP</a>
+      <a href="./menu.html">MENU</a>
+      <a href="./access.html">ACCESS</a>
+    </header>
+    <div>      <!-- メインコンテンツ -->
+      <div>    <!-- 文章部分 -->
+        <h1>メニュー</h1>
+        <div>
+          <img src="./assets/images/item_01.png">
+          <span>オリジナルコーヒー</span>
+          <p>ああああああああああああああああ</p>
+          <span>&yen;9999</span>
+        </div>
+        <div>
+          <img src="./assets/images/item_02.png">
+          <span>紅茶</span>
+          <p>ああああああああああああああああ</p>
+          <span>&yen;9999</span>
+        </div>
+        <div>
+          <img src="./assets/images/item_03.png">
+          <span>フレンチトースト</span>
+          <p>ああああああああああああああああ</p>
+          <span>&yen;9999</span>
+        </div>
+        <div>
+          <img src="./assets/images/item_04.png">
+          <span>アイスクリーム</span>
+          <p>ああああああああああああああああ</p>
+          <span>&yen;9999</span>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <img src="./assets/images/logo.png">
+      <span>© 2023 ABC Coffee</span>
+    </footer>
+  </body>
+</html>
+```
+
+[[TODO]] 画像とかはれ
+
+`div`で画像+説明のブロックを作ってコピペで増やしただけです。
+
+
+
+- ACCESSページ
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ABC Coffee | ACCESS</title>
+  </head>
+  <body>
+    <header>
+      <img src="./assets/images/logo.png">
+      <a href="./">TOP</a>
+      <a href="./menu.html">MENU</a>
+      <a href="./access.html">ACCESS</a>
+    </header>
+    <div>      <!-- メインコンテンツ -->
+      <div>    <!-- 文章部分 -->
+        <h1>アクセス</h1>
+        <ul>
+            <li>〇〇駅から徒歩5分</li>
+            <li>〇〇駅から徒歩10分</li>
+        </ul>
+      </div>
+    </div>
+    <footer>
+      <img src="./assets/images/logo.png">
+      <span>© 2023 ABC Coffee</span>
+    </footer>
+  </body>
+</html>
+```
+
+ちょっと書いただけです。あんまり書くことないのでページにしなくてもいいかもですね...
+
+Google Mapを埋め込んだりしたらいいかもです。興味ある人はやってみましょう。
+
+
+
+## 終わりに
+
+お疲れ様でした。
+
+さて、ここまでできたら次はCSS編です。
+
+今の状態では見た目が良くありません。色が簡素で、また目的のレイアウトになっていません。
+
+これらを設定し、Webページの見た目を完成させるのがCSSです。頑張りましょう!
+
+[CSS編](../css/)
